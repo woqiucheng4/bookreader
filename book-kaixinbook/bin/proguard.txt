@@ -1,0 +1,49 @@
+# view AndroidManifest.xml #generated:99
+-keep class com.hck.book.net.DwService { <init>(...); }
+
+# view AndroidManifest.xml #generated:92
+-keep class com.hck.book.net.OpenReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:98
+-keep class com.hck.book.net.OpenService { <init>(...); }
+
+# view AndroidManifest.xml #generated:75
+-keep class com.hck.book.ui.BookListActivity2 { <init>(...); }
+
+# view AndroidManifest.xml #generated:89
+-keep class com.hck.book.ui.DSWV { <init>(...); }
+
+# view AndroidManifest.xml #generated:85
+-keep class com.hck.book.ui.HelpActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:81
+-keep class com.hck.book.ui.InActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:86
+-keep class com.hck.book.ui.Loding2Activity { <init>(...); }
+
+# view AndroidManifest.xml #generated:63
+-keep class com.hck.book.ui.LodingActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:57
+-keep class com.hck.book.ui.MyApplication { <init>(...); }
+
+# view AndroidManifest.xml #generated:76
+-keep class com.hck.book.ui.Read { <init>(...); }
+
+# view res/layout/main.xml #generated:10
+-keep class com.hck.book.util.MyGridView { <init>(...); }
+
+# onClick res/layout/head.xml #generated:36
+-keepclassmembers class * { *** addText(...); }
+
+# onClick res/layout/in.xml #generated:14
+-keepclassmembers class * { *** back(...); }
+
+# onClick res/layout/main.xml #generated:26
+-keepclassmembers class * { *** showAd(...); }
+
+# onClick res/layout/head.xml #generated:7
+# onClick res/layout/in.xml #generated:27
+-keepclassmembers class * { *** showHelp(...); }
+
