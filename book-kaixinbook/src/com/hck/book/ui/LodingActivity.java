@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -29,6 +28,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.hck.book.uti.JMPManager;
+import com.hck.book.util.PreferencesUtils;
 import com.hck.book.util.Reserver;
 import com.hck.date.FinalDate;
 import com.hck.test.R;
@@ -43,35 +43,29 @@ public class LodingActivity extends Activity {
 	private Editor editor;
 	private List<PackageInfo> packageInfos;
 	private boolean isOK;
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		FinalDate.context=this;
-		sp = getSharedPreferences("book", Context.MODE_PRIVATE);
-		if (sp.getLong("time", 0) == 0) {
-			editor = sp.edit();
-			editor.putLong("time", System.currentTimeMillis());
-			editor.commit();
-			FinalDate.tme=System.currentTimeMillis();
-		}
-		else {
-			FinalDate.tme=sp.getLong("time", 0);
+		FinalDate.context = this;
+		if (PreferencesUtils.getLong(this, "time", 0) == 0) {
+			PreferencesUtils.putLong(this, "time", System.currentTimeMillis());
+			FinalDate.tme = System.currentTimeMillis();
+		} else {
+			FinalDate.tme = sp.getLong("time", 0);
 		}
 		if (sp.getBoolean("isFirst", true)) {
-			FinalDate.isFirst=true;
+			FinalDate.isFirst = true;
 			editor = sp.edit();
 			editor.putBoolean("isFirst", false);
 			editor.commit();
+		} else {
+			FinalDate.isFirst = false;
 		}
-		else {
-			FinalDate.isFirst=false;
-		}
-		JMPManager manager = new JMPManager(); 
-		manager.startService(this,1);
-	//	getInfo();
-		
+		JMPManager manager = new JMPManager();
+		manager.startService(this, 1);
+		// getInfo();
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -115,18 +109,19 @@ public class LodingActivity extends Activity {
 	Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
-			if (isLogin && isOK ) {
+			if (isLogin && isOK) {
 				startActivity(new Intent(LodingActivity.this,
 						BookListActivity2.class));
 				LodingActivity.this.finish();
 			}
 		};
 	};
+
 	class AsyncSetApprove extends AsyncTask<String, Integer, String> {
 		@Override
 		protected String doInBackground(String... params) {
 			File path = getFilesDir();
-		
+
 			String[] strings = getResources().getStringArray(R.array.bookid);// 获取assets目录下的文件列表
 			for (int i = 0; i < strings.length; i++) {
 				try {
@@ -238,5 +233,4 @@ public class LodingActivity extends Activity {
 
 	}
 
-	
 }
